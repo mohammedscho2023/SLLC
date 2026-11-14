@@ -1,11 +1,15 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>SLLC Online Course</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SLLC Online Course — Imagine1Day</title>
+<meta name="description" content="School-Based Literacy and Language Club implementation course for Ethiopian primary schools (Grades 1–8).">
+<meta name="theme-color" content="#0d6b50" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1612" media="(prefers-color-scheme: dark)">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
 <style>
-/* Layout: sticky top bar, centred 1100px column; course view = module rail + lesson pane (rail collapses to a menu on phones).
-   Type: Bricolage Grotesque for headings (character), Atkinson Hyperlegible for text (built for legibility, fits a literacy course). */
-:root{
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
   --bg:#f5f7f4; --surface:#ffffff; --surface2:#eaf0ec; --ink:#14201b; --muted:#53635b; --line:#d3ddd6;
   --accent:#0d6b50; --accent-ink:#ffffff; --sun:#f0b323; --sun-ink:#3a2a00; --good:#13795b; --bad:#b3261e; --good-bg:#e1f3ec; --bad-bg:#fbe6e4;
   --head:"Bricolage Grotesque","Atkinson Hyperlegible",system-ui,sans-serif; --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -16,8 +20,11 @@
 :root[data-theme="dark"]{
   --bg:#0e1612; --surface:#16211b; --surface2:#1e2c25; --ink:#e8f0eb; --muted:#9db0a5; --line:#2c3d34;
   --accent:#3fbf93; --accent-ink:#06231a; --sun:#f0b323; --sun-ink:#3a2a00; --good:#4fd1a1; --bad:#ff8a80; --good-bg:#12372b; --bad-bg:#40201d; color-scheme:dark}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+*,*::before,*::after{box-sizing:border-box}
+img{max-width:100%}
+[hidden]:not([hidden=until-found i]){display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);margin:0;padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:30}
 h1,h2,h3{font-family:var(--head);line-height:1.15;text-wrap:balance;margin:0}
 h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-.02em}
@@ -25,6 +32,9 @@ h2{font-size:1.6rem;font-weight:800;letter-spacing:-.01em}
 h3{font-size:1.15rem;font-weight:600}
 p{margin:0}
 a{color:var(--accent)}
+[tabindex="-1"]:focus{outline:none}
+.skip{position:absolute;left:-999px;top:env(safe-area-inset-top,0px);z-index:100;background:var(--accent);color:var(--accent-ink);padding:10px 16px;text-decoration:none;font-weight:700;border-radius:0 0 10px 0}
+.skip:focus{left:0}
 .wrap{max-width:1100px;margin:0 auto}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
 .bar{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:10px 0}
@@ -41,7 +51,8 @@ button:hover,.btn:hover{border-color:var(--accent)}
 .primary:hover{filter:brightness(1.08)}
 .sun{background:var(--sun);color:var(--sun-ink);border-color:var(--sun)}
 button[disabled]{opacity:.5;cursor:not-allowed}
-input[type=text],input[type=email],input[type=password]{font:inherit;width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px}
+.theme-btn{min-height:40px;min-width:40px;padding:0 8px;font-size:1.15rem;line-height:1;border-radius:10px}
+input[type=text],input[type=email],input[type=password],input[type=url]{font:inherit;width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-height:44px}
 label{display:block;font-weight:700;margin-bottom:4px;font-size:.95rem}
 .field{display:grid;gap:2px;margin-bottom:14px}
 .hint{color:var(--muted);font-size:.9rem}
@@ -137,12 +148,15 @@ select{min-height:44px}
 .pdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sun);margin-left:auto;flex:0 0 auto}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
-
+</head>
+<body>
+<a class="skip" href="#app">Skip to main content</a>
 <header class="top"><div class="bar">
   <a class="brand" href="#home"><span class="mark" aria-hidden="true">Aa</span>SLLC Online Course</a>
   <nav id="nav" aria-label="Main"></nav>
+  <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle colour theme" title="Toggle colour theme">☾</button>
 </div></header>
-<main class="wrap" id="app" aria-live="polite"></main>
+<main class="wrap" id="app" tabindex="-1"></main>
 <footer id="foot"></footer>
 
 <script>
@@ -161,26 +175,34 @@ const CFG = {
   pageUrl: "https://claude.ai/artifact/H7AYWxnnBFwjDHb8yznzLo",
   instructorHash: "3b7af1bb3e422b7d1c9fd21c9d5e10d8a21d1bdc30f9f4fc92d2902a6a773c3c"
 };
+
+/* SHA-256 using TextEncoder for correct UTF-8 handling */
 function sha256(s){
   const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
-  const b=[];for(const c of unescape(encodeURIComponent(s)))b.push(c.charCodeAt(0));
-  const l=b.length*8;b.push(0x80);while(b.length%64!==56)b.push(0);
-  for(let i=7;i>=0;i--)b.push(i>3?0:(l>>>(i*8))&255);
-  let h=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
-  const R=(x,n)=>(x>>>n)|(x<<(32-n));
-  for(let o=0;o<b.length;o+=64){
-    const w=new Array(64);
-    for(let i=0;i<16;i++)w[i]=(b[o+4*i]<<24)|(b[o+4*i+1]<<16)|(b[o+4*i+2]<<8)|b[o+4*i+3];
-    for(let i=16;i<64;i++){const s0=R(w[i-15],7)^R(w[i-15],18)^(w[i-15]>>>3),s1=R(w[i-2],17)^R(w[i-2],19)^(w[i-2]>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)|0}
-    let [a,c,d,e,f,g,hh,j]=h;
-    for(let i=0;i<64;i++){
-      const S1=R(f,6)^R(f,11)^R(f,25),ch=(f&g)^(~f&hh),t1=(j+S1+ch+K[i]+w[i])|0;
-      const S0=R(a,2)^R(a,13)^R(a,22),mj=(a&c)^(a&d)^(c&d),t2=(S0+mj)|0;
-      j=hh;hh=g;g=f;f=(e+t1)|0;e=d;d=c;c=a;a=(t1+t2)|0;
+  const b = Array.from(new TextEncoder().encode(s));
+  const l = b.length * 8;
+  b.push(0x80);
+  while (b.length % 64 !== 56) b.push(0);
+  for (let i = 7; i >= 0; i--) b.push(i > 3 ? 0 : (l >>> (i * 8)) & 255);
+  let h = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const R = (x, n) => (x >>> n) | (x << (32 - n));
+  for (let o = 0; o < b.length; o += 64) {
+    const w = new Array(64);
+    for (let i = 0; i < 16; i++) w[i] = (b[o + 4*i] << 24) | (b[o + 4*i + 1] << 16) | (b[o + 4*i + 2] << 8) | b[o + 4*i + 3];
+    for (let i = 16; i < 64; i++) {
+      const s0 = R(w[i-15],7) ^ R(w[i-15],18) ^ (w[i-15] >>> 3);
+      const s1 = R(w[i-2],17) ^ R(w[i-2],19) ^ (w[i-2] >>> 10);
+      w[i] = (w[i-16] + s0 + w[i-7] + s1) | 0;
     }
-    h=[h[0]+a,h[1]+c,h[2]+d,h[3]+e,h[4]+f,h[5]+g,h[6]+hh,h[7]+j].map(x=>x|0);
+    let [a,c,d,e,f,g,hh,j] = h;
+    for (let i = 0; i < 64; i++) {
+      const S1 = R(f,6) ^ R(f,11) ^ R(f,25), ch = (f & g) ^ (~f & hh), t1 = (j + S1 + ch + K[i] + w[i]) | 0;
+      const S0 = R(a,2) ^ R(a,13) ^ R(a,22), mj = (a & c) ^ (a & d) ^ (c & d), t2 = (S0 + mj) | 0;
+      j = hh; hh = g; g = f; f = (e + t1) | 0; e = d; d = c; c = a; a = (t1 + t2) | 0;
+    }
+    h = [h[0]+a,h[1]+c,h[2]+d,h[3]+e,h[4]+f,h[5]+g,h[6]+hh,h[7]+j].map(x => x | 0);
   }
-  return h.map(x=>(x>>>0).toString(16).padStart(8,'0')).join('');
+  return h.map(x => (x >>> 0).toString(16).padStart(8,'0')).join('');
 }
 
 const MODULES = [
@@ -485,11 +507,11 @@ function vidBlock(m){
 }
 function practiceBlock(m){
   const pr = PRACTICE[m.id], ps = S.practice[m.id] || {c:[],t:''};
-  return `<section class="prac" id="prac"><div class="row"><span class="pill sunp">Practice task</span>${ps.done?'<span class="pill ok">Completed</span>':''}</div>
+  return `<section class="prac" id="prac"><div class="row"><span class="pill sunp">Practice task</span><span class="pill ok" id="pracbadge" ${ps.done?'':'hidden'}>Completed</span></div>
     <h3>${esc(pr.title)}</h3><p>${esc(pr.task)}</p>
     <fieldset class="stack" style="gap:8px"><legend class="hint" style="margin-bottom:6px">Tick each step when you have done it</legend>${pr.steps.map((s,i)=>`<label class="chk"><input type="checkbox" data-pc="${i}" ${ps.c&&ps.c[i]?'checked':''}><span>${esc(s)}</span></label>`).join('')}</fieldset>
     <div class="field" style="margin:0"><label for="pt">${esc(pr.prompt)}</label><textarea id="pt" maxlength="2000">${esc(ps.t||'')}</textarea><span class="hint" id="pcount"></span></div>
-    <div id="pmsg"></div>
+    <div id="pmsg" role="status"></div>
     <div class="row"><button class="primary" id="psave" type="button">Save practice</button><button type="button" id="pmail">Send to the course owner for feedback</button></div>
     <div id="pmailbox"></div></section>`;
 }
@@ -504,15 +526,25 @@ function wirePractice(m){
   const pr = PRACTICE[m.id]; if (!pr || !$('#pt')) return;
   const cnt = () => { $('#pcount').textContent = $('#pt').value.trim().length + ' of ' + CFG.practiceMinChars + ' characters minimum'; };
   cnt();
-  $('#pt').oninput = () => { cnt(); savePractice(m,false); };
+  let pracT;
+  $('#pt').oninput = () => { cnt(); clearTimeout(pracT); pracT = setTimeout(() => savePractice(m,false), 350); };
   document.querySelectorAll('[data-pc]').forEach(x => x.onchange = () => savePractice(m,false));
   $('#psave').onclick = () => {
+    clearTimeout(pracT);
     const ok = savePractice(m,true);
     $('#pmsg').innerHTML = ok
       ? `<div class="msg good">Practice saved and complete.</div><div class="msg info" style="margin-top:8px"><b>A strong answer includes:</b> ${esc(pr.model)}</div>`
       : `<div class="msg bad">Saved as a draft. To complete this task, tick every step and write at least ${CFG.practiceMinChars} characters.</div>`;
+    const badge = $('#pracbadge'); if (badge) badge.hidden = !ok;
+    const pp = $('#ppill'); if (pp){ pp.hidden = !ok; pp.classList.toggle('ok', ok); pp.textContent = ok ? 'Practice done' : 'Practice done'; }
+    document.querySelectorAll(`[data-mod="${m.id}"]`).forEach(b => {
+      const dot = b.querySelector('.pdot');
+      if (ok && !dot){ const d = document.createElement('span'); d.className='pdot'; d.title='Practice task done'; b.appendChild(d); }
+      if (!ok && dot) dot.remove();
+    });
   };
   $('#pmail').onclick = () => {
+    clearTimeout(pracT);
     savePractice(m,false);
     const L = S.learner || {}, ps = S.practice[m.id];
     const subject = 'SLLC practice task, module '+m.id+': '+(L.name||'');
@@ -530,7 +562,12 @@ function wireListen(m){
   b.onclick = () => {
     if (b.getAttribute('aria-pressed') === 'true') { ss.cancel(); off(); return; }
     const parts = [m.title+'.', m.intro];
-    m.sections.forEach(s => { parts.push(s.h+'.'); if (s.p) parts.push(s.p); if (s.l) s.l.forEach(x => parts.push(x+'.')); });
+    m.sections.forEach(s => {
+      parts.push(s.h+'.');
+      if (s.p) parts.push(s.p);
+      if (s.l) s.l.forEach(x => parts.push(x+'.'));
+      if (s.table) s.table.rows.forEach(r => parts.push(r.join(', ') + '.'));
+    });
     ss.cancel(); b.setAttribute('aria-pressed','true'); b.textContent = 'Stop listening';
     parts.forEach((p,i) => { const u = new SpeechSynthesisUtterance(p); u.lang = 'en-GB'; u.rate = .95; if (i === parts.length-1) u.onend = off; ss.speak(u); });
   };
@@ -551,14 +588,66 @@ const unlocked = () => !!(S.learner && S.learner.ok);
 const doneCount = () => MODULES.filter(m => S.done[m.id]).length;
 const allDone = () => doneCount() === MODULES.length;
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-let toastT;
 async function copy(text, btn){
   try { await navigator.clipboard.writeText(text); if (btn){ const o=btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=o,1500); } }
   catch(e){ if (btn){ btn.textContent='Select and copy'; } }
 }
+async function downloadFile(name, blob, msgEl){
+  try {
+    if (typeof claude !== 'undefined' && claude.use){
+      const dls = await claude.use('downloads');
+      if (dls) { await dls.save({filename:name, data:blob}); return true; }
+    }
+  } catch(e){
+    if (e && e.code === 'declined'){ if (msgEl) msgEl.textContent = 'Download cancelled.'; return false; }
+  }
+  try {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+    if (msgEl) msgEl.textContent = '';
+    return true;
+  } catch(e){
+    if (msgEl) msgEl.textContent = 'Download failed. Use the copy button instead.';
+    return false;
+  }
+}
+
+/* ======= theme toggle ======= */
+function currentTheme(){
+  let t = null; try { t = localStorage.getItem('sllc-theme'); } catch(e){}
+  if (t === 'light' || t === 'dark') return t;
+  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+function updateThemeBtn(){
+  const b = $('#theme-toggle'); if (!b) return;
+  const cur = currentTheme();
+  b.textContent = cur === 'dark' ? '☀' : '☾';
+  const label = 'Switch to ' + (cur === 'dark' ? 'light' : 'dark') + ' mode';
+  b.setAttribute('aria-label', label); b.title = label;
+}
+function applyTheme(){
+  let t = null; try { t = localStorage.getItem('sllc-theme'); } catch(e){}
+  if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  else delete document.documentElement.dataset.theme;
+  updateThemeBtn();
+}
+applyTheme();
+$('#theme-toggle').onclick = () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('sllc-theme', next); } catch(e){}
+  document.documentElement.dataset.theme = next;
+  updateThemeBtn();
+};
 
 /* ======= views ======= */
 let current = 'home', modIdx = 1, examState = null, invite = '';
+function focusHeading(){
+  const h = document.querySelector('#app h1, #app h2');
+  if (h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
+}
 function route(){
   const h = (location.hash||'#home').slice(1);
   const iv = h.match(/^join-([A-Za-z0-9]{8})$/); if (iv) invite = iv[1].toUpperCase();
@@ -566,6 +655,7 @@ function route(){
   if (iv){ current='home'; }
   else if (m){ current='course'; modIdx = Math.min(MODULES.length, Math.max(1, +m[1])); }
   else current = ['home','course','portfolio','exam','certificate','instructor'].includes(h) ? h : 'home';
+  if (current !== 'exam') examState = null;
   render();
 }
 function nav(){
@@ -576,8 +666,9 @@ function render(){
   nav();
   try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch(e){}
   const gated = ['course','portfolio','exam','certificate'].includes(current) && !unlocked();
-  if (gated) { $('#app').innerHTML = gate(); return; }
+  if (gated) { $('#app').innerHTML = gate(); focusHeading(); return; }
   ({home:viewHome, course:viewCourse, portfolio:viewPortfolio, exam:viewExam, certificate:viewCert, instructor:viewInstructor})[current]();
+  focusHeading();
   window.scrollTo(0,0);
 }
 function gate(){
@@ -611,7 +702,7 @@ function viewHome(){
       <div class="field"><label for="rr">Your role</label><select id="rr"><option>Teacher</option><option>School director</option><option>Club coordinator</option><option>Volunteer</option><option>Supervisor</option><option>Parent or community member</option><option>Other</option></select></div>
       <label class="opt" style="margin-bottom:14px"><input type="checkbox" id="rj"><span>I have joined ${esc(CFG.social.name)}.</span></label>
       <div class="row" style="margin-bottom:14px">${soc}</div>
-      <div id="regmsg"></div>
+      <div id="regmsg" role="status"></div>
       <button class="primary" type="submit">Prepare my request email</button>
     </form>
     <form class="card" id="code" novalidate>
@@ -619,7 +710,7 @@ function viewHome(){
       <div class="field"><label for="ce">Email you registered with</label><input id="ce" type="email" autocomplete="email"></div>
       <div class="field"><label for="cn">Full name</label><input id="cn" type="text" autocomplete="name"></div>
       <div class="field"><label for="cc">Access code</label><input id="cc" type="text" autocapitalize="characters" autocomplete="off" value="${invite?esc(invite.slice(0,4)+'-'+invite.slice(4)):''}"></div>
-      <div id="codemsg"></div>
+      <div id="codemsg" role="alert"></div>
       <button class="primary" type="submit">Open the course</button>
     </form></div>`}`;
   if (unlocked()) { $('#signout').onclick = () => { if (S.learner){ S.learner.ok=false; save(); } render(); }; return; }
@@ -664,12 +755,17 @@ function railHtml(){
 function viewCourse(){
   const m = MODULES[modIdx-1], pct = Math.round(doneCount()/MODULES.length*100);
   const secs = m.sections.map(s => `<section><h3>${esc(s.h)}</h3>${s.p?`<p>${esc(s.p)}</p>`:''}${s.l?`<ul>${s.l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${s.table?`<div class="tablewrap" tabindex="0"><table><thead><tr>${s.table.head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${s.table.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:''}</section>`).join('');
-  const prev = S.done[m.id];
+  const prev = S.done[m.id], prac = S.practice[m.id] && S.practice[m.id].done;
   $('#app').innerHTML = `<div class="course">
     <aside><details class="menu"><summary>Modules (${doneCount()}/${MODULES.length} complete)</summary><div class="rail">${railHtml()}</div></details>
-    <div class="rail" aria-label="Modules"><div style="padding:0 4px 10px"><div class="hint" style="margin-bottom:6px">${doneCount()} of ${MODULES.length} modules complete</div><div class="progress"><i style="width:${pct}%"></i></div></div>${railHtml()}</div></aside>
+    <div class="rail" aria-label="Modules"><div style="padding:0 4px 10px"><div class="hint" style="margin-bottom:6px">${doneCount()} of ${MODULES.length} modules complete</div><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${MODULES.length}" aria-valuenow="${doneCount()}"><i style="width:${pct}%"></i></div></div>${railHtml()}</div></aside>
     <article class="lesson">
-      <div><span class="pill">Module ${m.id} of ${MODULES.length} · about ${m.mins} min</span>${prev?` <span class="pill ok">Quiz passed ${prev.score}/4</span>`:''}${S.practice[m.id]&&S.practice[m.id].done?' <span class="pill ok">Practice done</span>':''} <button type="button" class="listen" id="listen" aria-pressed="false" style="min-height:32px;padding:2px 12px;font-size:.88rem;margin-left:6px">Listen to this lesson</button></div>
+      <div class="row" style="gap:6px;align-items:center">
+        <span class="pill">Module ${m.id} of ${MODULES.length} · about ${m.mins} min</span>
+        <span class="pill ${prev?'ok':''}" id="qpill" ${prev?'':'hidden'}>${prev?`Quiz passed ${prev.score}/4`:'Quiz passed'}</span>
+        <span class="pill ${prac?'ok':''}" id="ppill" ${prac?'':'hidden'}>Practice done</span>
+        <button type="button" class="listen" id="listen" aria-pressed="false" style="min-height:32px;padding:2px 12px;font-size:.88rem">Listen to this lesson</button>
+      </div>
       <h2>${esc(m.title)}</h2><p class="lead" style="color:var(--muted)">${esc(m.intro)}</p>
       ${VIS[m.id]?VIS[m.id]():''}
       ${secs}
@@ -677,7 +773,7 @@ function viewCourse(){
       ${m.res&&m.res.length?`<section><h3>Listen, read and tools</h3><ul class="res">${m.res.map(r=>`<li><a href="${esc(r.u)}" target="_blank" rel="noopener noreferrer"><span class="k ${r.k}">${{video:'Video',audio:'Audio',tool:'Tool',read:'Read'}[r.k]}</span><b>${esc(r.t)}</b><span class="d">${esc(r.d)}</span></a></li>`).join('')}</ul><p class="hint">Links open in a new tab on the provider's own site. They are optional extras and not part of the exam.</p></section>`:''}
       <section><h3>Assessment 1: check your understanding</h3><p class="hint">Answer all 4 questions. You need ${CFG.passModule} correct to complete this module. You can retry as often as you like.</p>
       <form id="qz" class="stack">${m.quiz.map((q,i)=>`<fieldset class="q"><legend>${i+1}. ${esc(q.q)}</legend>${q.o.map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${esc(o)}</span></label>`).join('')}<div class="why" id="w${i}" hidden></div></fieldset>`).join('')}
-      <div id="qres"></div><div class="row"><button class="primary" type="submit">Submit answers</button></div></form></section>
+      <div id="qres" role="status"></div><div class="row"><button class="primary" type="submit">Submit answers</button></div></form></section>
       ${practiceBlock(m)}
       <div class="row" style="justify-content:space-between">${modIdx>1?`<a class="btn" href="#module-${modIdx-1}">Previous module</a>`:'<span></span>'}${modIdx<MODULES.length?`<a class="btn" href="#module-${modIdx+1}">Next module</a>`:`<a class="btn sun" href="#exam">${allDone()?'Take the final exam':'Final exam'}</a>`}</div>
     </article></div>`;
@@ -694,7 +790,12 @@ function viewCourse(){
     });
     const ok = score >= CFG.passModule;
     $('#qres').innerHTML = `<div class="msg ${ok?'good':'bad'}">${ok?`You scored ${score}/4. Module complete.`:`You scored ${score}/4. You need ${CFG.passModule} to complete this module. Review the lesson and try again.`}</div>`;
-    if (ok){ S.done[m.id] = {score, at:new Date().toISOString()}; save(); const t=$('.rail .n'); }
+    if (ok){
+      S.done[m.id] = {score, at:new Date().toISOString()}; save();
+      document.querySelectorAll(`[data-mod="${m.id}"]`).forEach(b => { b.classList.add('done'); const n = b.querySelector('.n'); if (n) n.textContent = '✓'; });
+      const qp = $('#qpill'); if (qp){ qp.hidden = false; qp.classList.add('ok'); qp.textContent = 'Quiz passed ' + score + '/4'; }
+    }
+    const r = $('#qres'); r.setAttribute('tabindex','-1'); r.focus();
   };
 }
 
@@ -717,7 +818,7 @@ function viewExam(){
   }
   $('#app').innerHTML = `<div class="stack" style="padding-top:24px"><h2>Final exam</h2><p class="hint">Answer every question, then submit. ${CFG.examSize} questions, ${CFG.passPct}% to pass.</p>
     <form id="ex" class="stack">${examState.map((q,i)=>`<fieldset class="q"><legend>${i+1}. ${esc(q.q)}</legend>${q.o.map((o,j)=>`<label class="opt"><input type="radio" name="e${i}" value="${j}"><span>${esc(o)}</span></label>`).join('')}<div class="why" id="ew${i}" hidden></div></fieldset>`).join('')}
-    <div id="eres"></div><div class="row"><button class="primary" type="submit">Submit exam</button></div></form></div>`;
+    <div id="eres" role="status"></div><div class="row"><button class="primary" type="submit">Submit exam</button></div></form></div>`;
   $('#ex').onsubmit = ev => {
     ev.preventDefault();
     const unanswered = examState.filter((_,i)=>!document.querySelector(`input[name=e${i}]:checked`)).length;
@@ -735,7 +836,7 @@ function viewExam(){
     $('#eres').innerHTML = `<div class="msg ${passed?'good':'bad'}">You scored ${score}/${examState.length} (${pct}%). ${passed?'You passed.':'The pass mark is '+CFG.passPct+'%. Review the explanations above and retake the exam.'}</div>
       <div class="row">${passed?'<a class="btn sun" href="#certificate">Get my certificate</a>':''}<button type="button" id="again">${passed?'Retake exam':'Try again'}</button></div>`;
     $('#again').onclick = () => { examState=null; viewExam(); };
-    $('#eres').scrollIntoView({behavior:'smooth',block:'center'});
+    const er = $('#eres'); er.setAttribute('tabindex','-1'); er.focus();
     document.querySelector('#ex button[type=submit]').disabled = true;
   };
 }
@@ -768,13 +869,12 @@ function viewCert(){
   const svg = certSvg(L.name, ds, certId(L.email), S.exam.score);
   $('#app').innerHTML = `<div class="stack" style="padding-top:24px"><h2>Your certificate</h2>
     <div class="cert">${svg}</div>
-    <div class="row"><button class="primary" id="dpng">Download PNG</button><button id="dsvg">Download SVG</button></div><div id="dmsg" class="hint"></div>
+    <div class="row"><button class="primary" id="dpng">Download PNG</button><button id="dsvg">Download SVG</button></div><div id="dmsg" class="hint" role="status"></div>
     <p class="hint">Anyone can confirm this certificate by emailing the certificate ID and your registered email to ${esc(CFG.ownerEmail)}.</p></div>`;
   const fname = 'SLLC-certificate-'+L.name.replace(/[^\w]+/g,'-');
-  async function dl(name, data){ try { const dls = await claude.use('downloads'); if (!dls) throw 0; await dls.save({filename:name, data}); } catch(e){ $('#dmsg').textContent = (e && e.code==='declined') ? 'Download cancelled.' : 'Downloads are not available in this view. Open the course in a full browser tab, or take a screenshot of the certificate.'; } }
-  $('#dsvg').onclick = () => dl(fname+'.svg', new Blob([svg],{type:'image/svg+xml'}));
+  $('#dsvg').onclick = () => downloadFile(fname+'.svg', new Blob([svg],{type:'image/svg+xml'}), $('#dmsg'));
   $('#dpng').onclick = () => {
-    const img = new Image(); img.onload = () => { const c=document.createElement('canvas'); c.width=2400; c.height=1700; const x=c.getContext('2d'); x.drawImage(img,0,0,2400,1700); c.toBlob(b => b ? dl(fname+'.png', b) : ($('#dmsg').textContent='Could not create the PNG. Use SVG instead.'), 'image/png'); };
+    const img = new Image(); img.onload = () => { const c=document.createElement('canvas'); c.width=2400; c.height=1700; const x=c.getContext('2d'); x.drawImage(img,0,0,2400,1700); c.toBlob(b => b ? downloadFile(fname+'.png', b, $('#dmsg')) : ($('#dmsg').textContent='Could not create the PNG. Use SVG instead.'), 'image/png'); };
     img.onerror = () => $('#dmsg').textContent='Could not create the PNG. Use SVG instead.';
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   };
@@ -800,16 +900,23 @@ function viewPortfolio(){
   $('#app').innerHTML = `<div class="stack" style="padding-top:24px"><div><span class="pill">Practice-based assessment</span></div><h2>My practice portfolio</h2>
     <p class="lead" style="color:var(--muted)">Each module has a hands-on practice task. Your saved answers collect here. You need at least ${need} completed tasks, and a passed final exam, to earn the certificate.</p>
     <div class="stat"><div><b>${n}/${MODULES.length}</b>practice tasks complete</div><div><b>${doneCount()}/${MODULES.length}</b>module quizzes passed</div></div>
-    <div class="progress"><i style="width:${Math.round(n/MODULES.length*100)}%"></i></div>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${MODULES.length}" aria-valuenow="${n}"><i style="width:${Math.round(n/MODULES.length*100)}%"></i></div>
     <div class="tablewrap" tabindex="0"><table><thead><tr><th>#</th><th>Practice task</th><th>Quiz</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
     <div class="row"><button class="primary" id="pdl">Download portfolio (.txt)</button><button id="pcp">Copy portfolio</button><button id="pem">Email to the course owner</button></div>
-    <div id="pbox"></div><div id="pdm" class="hint"></div></div>`;
+    <div id="pbox"></div><div id="pdm" class="hint" role="status"></div>
+    <div class="row" style="margin-top:18px"><button type="button" id="preset" style="border-color:var(--bad);color:var(--bad)">Reset all progress on this device</button></div></div>`;
   const txt = portfolioText();
   $('#pcp').onclick = e => copy(txt, e.target);
-  $('#pdl').onclick = async () => { try { const d = await claude.use('downloads'); if (!d) throw 0; await d.save({filename:'SLLC-portfolio-'+L.name.replace(/[^\w]+/g,'-')+'.txt', data:new Blob([txt],{type:'text/plain'})}); } catch(e){ $('#pdm').textContent = (e && e.code==='declined') ? 'Download cancelled.' : 'Downloads are not available in this view. Use Copy portfolio instead.'; } };
+  $('#pdl').onclick = () => downloadFile('SLLC-portfolio-'+L.name.replace(/[^\w]+/g,'-')+'.txt', new Blob([txt],{type:'text/plain'}), $('#pdm'));
   $('#pem').onclick = () => {
     const subject = 'SLLC practice portfolio: '+L.name, short = txt.length > 1500 ? txt.slice(0,1500)+'\n[Text cut here. Use the copied portfolio for everything.]' : txt;
     $('#pbox').innerHTML = `<div class="row">${mailBtns(CFG.ownerEmail, subject, short)}</div><p class="hint">Opens a message to ${esc(CFG.ownerEmail)}. For the full text, press Copy portfolio and paste it into the message.</p>`;
+  };
+  $('#preset').onclick = () => {
+    if (!confirm('This will delete all your module progress, practice answers and exam results on this device. Your registration will be kept. Continue?')) return;
+    const learner = S.learner;
+    S = { learner, done:{}, exam:null, practice:{} };
+    save(); render();
   };
 }
 
@@ -819,7 +926,7 @@ const adminSave = l => { try { localStorage.setItem(ADMIN_KEY, JSON.stringify(l)
 let instrOk = false;
 function viewInstructor(){
   if (!instrOk) {
-    $('#app').innerHTML = `<div class="hero"><span class="pill">Admin</span><h2>Approve learners</h2><form id="ik" class="card stack" style="max-width:420px"><div class="field"><label for="ikk">Admin key</label><input id="ikk" type="password" autocomplete="off"></div><div id="ikm"></div><button class="primary" type="submit">Open</button></form></div>`;
+    $('#app').innerHTML = `<div class="hero"><span class="pill">Admin</span><h2>Approve learners</h2><form id="ik" class="card stack" style="max-width:420px"><div class="field"><label for="ikk">Admin key</label><input id="ikk" type="password" autocomplete="off"></div><div id="ikm" role="alert"></div><button class="primary" type="submit">Open</button></form></div>`;
     $('#ik').onsubmit = ev => { ev.preventDefault(); if (sha256($('#ikk').value.trim())===CFG.instructorHash){ instrOk=true; viewInstructor(); } else $('#ikm').innerHTML='<div class="msg bad">Wrong key.</div>'; };
     return;
   }
@@ -830,8 +937,9 @@ function viewInstructor(){
       <div class="field"><label for="an">Learner's name</label><input id="an" type="text"></div>
       <div class="field"><label for="as">School</label><input id="as" type="text"></div>
       <div class="field"><label for="ar0">Role</label><input id="ar0" type="text"></div>
+      <div class="field"><label for="abase">Course page URL (used to build approval links)</label><input id="abase" type="url" value="${esc(CFG.pageUrl)}"></div>
       <div class="row"><button class="primary" type="submit">Approve and prepare email</button><button type="button" id="ad">Ask for more information</button></div>
-      <div id="ar" class="stack"></div>
+      <div id="ar" role="status"></div>
     </form>
     <section class="stack" style="margin-top:28px"><h3>Approved on this device</h3><div id="logbox"></div></section>`;
   const drawLog = () => {
@@ -853,7 +961,9 @@ function viewInstructor(){
     ev.preventDefault();
     const {e,n,sc,ro} = read();
     if (bad(e)) { $('#ar').innerHTML = '<div class="msg bad">Enter a valid email.</div>'; return; }
-    const code = accessCode(e), link = CFG.pageUrl+'#join-'+code.replace('-','');
+    const code = accessCode(e);
+    const base = ($('#abase').value.trim() || CFG.pageUrl).replace(/#.*$/,'');
+    const link = base + '#join-' + code.replace('-','');
     const subject = 'Your SLLC course access: approved';
     const body = `Hello ${n||''},\n\nYour registration for the ${CFG.course} online course is approved.\n\nYour personal approval link:\n${link}\n\nOpen the link, enter your name and this email address (${e}), and start the course. If the link does not fill in your code, type it yourself: ${code}\n\nHow the course works: study the 14 modules, pass each module check, complete the practice tasks (at least ${CFG.practiceMin} of 14), pass the final exam (${CFG.passPct}%) and download your certificate.\n\nThis link is personal. Please do not share it.\n\n${CFG.org}`;
     const log = adminLog().filter(r => r.email !== e); log.unshift({name:n, email:e, school:sc, role:ro, at:new Date().toISOString()}); adminSave(log); drawLog();
@@ -876,5 +986,5 @@ function viewInstructor(){
 $('#foot').innerHTML = `<p>${esc(CFG.org)} · ${esc(CFG.course)} online course · Based on the SLLC implementation manual, 12 October 2026. Progress is saved in this browser only. · <a href="#instructor">Admin</a></p>`;
 window.addEventListener('hashchange', route); route();
 </script>
-
-</body></html>
+</body>
+</html>
